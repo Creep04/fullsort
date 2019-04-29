@@ -11,6 +11,15 @@ func stringPanic(t *testing.T, a, b interface{}, msg string) {
 	stringComparator(a, b)
 }
 
+func floatPanic(t *testing.T, a, b interface{}, msg string) {
+	defer func() {
+		if r := recover(); r == nil {
+			t.Error(msg + ": expected panic")
+		}
+	}
+	floatComparator(a, b)
+}
+
 func TestStringComparator(t *testing.T) {
 	a, b := "aaaa", "ba"
 	if stringComparator(a, b) {
@@ -68,6 +77,12 @@ func TestFloatComparator32(t *testing.T) {
 	if a, b = -35, -35; floatComparator(a, b) {
 		t.Error("Compare -35 and -35: expected false")
 	}
+
+	floatPanic(t, 42, "world", "Compare integer and string")
+	floatPanic(t, 42, 54.5, "Compare integer and float")
+	floatPanic(t, 42.5, 54, "Compare float and integer")
+	floatPanic(t, "hello", 54.5, "Compare string and float")
+	floatPanic(t, "hello", "world", "Compare string and string")
 }
 
 func TestFloatComparator64(t *testing.T) {
@@ -101,4 +116,10 @@ func TestFloatComparator64(t *testing.T) {
 	if a, b = -35, -35; floatComparator(a, b) {
 		t.Error("Compare -35 and -35: expected false")
 	}
+
+	floatPanic(t, 42, "world", "Compare integer and string")
+	floatPanic(t, 42, 54.5, "Compare integer and float")
+	floatPanic(t, 42.5, 54, "Compare float and integer")
+	floatPanic(t, "hello", 54.5, "Compare string and float")
+	floatPanic(t, "hello", "world", "Compare string and string")
 }
