@@ -7,7 +7,7 @@ func stringPanic(t *testing.T, a, b interface{}, msg string) {
 		if r := recover(); r == nil {
 			t.Error(msg + ": expected panic")
 		}
-	}
+	}()
 	stringComparator(a, b)
 }
 
@@ -16,7 +16,7 @@ func floatPanic(t *testing.T, a, b interface{}, msg string) {
 		if r := recover(); r == nil {
 			t.Error(msg + ": expected panic")
 		}
-	}
+	}()
 	floatComparator(a, b)
 }
 
