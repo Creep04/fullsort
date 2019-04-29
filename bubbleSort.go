@@ -31,3 +31,7 @@ func BubbleSortInt(arr []int) (*Response, error) {
 	}
 	return &Response{swaps, accesses, time.Since(tstart)}, nil
 }
+
+func BubbleSort(arr interface{}, eval func(a, b interface{}) bool) (*Response, error) {
+	return nil, nil
+}
