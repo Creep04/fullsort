@@ -2,6 +2,15 @@ package fullsort
 
 import "testing"
 
+func stringPanic(t *testing.T, a, b interface{}, msg string) {
+	defer func() {
+		if r := recover(); r == nil {
+			t.Error(msg + ": expected panic")
+		}
+	}
+	stringComparator(a, b)
+}
+
 func TestStringComparator(t *testing.T) {
 	a, b := "aaaa", "ba"
 	if stringComparator(a, b) {
@@ -22,6 +31,10 @@ func TestStringComparator(t *testing.T) {
 	if stringComparator("hell", "hello") {
 		t.Error("Compare \"hell\" and \"hello\": expected false")
 	}
+
+	stringPanic(t, 42, 35, "Compare integers")
+	stringPanic(t, "hello", 35, "Compare string and integer")
+	stringPanic(t, 42, "world", "Compare integer and string")
 }
 
 func TestFloatComparator32(t *testing.T) {
