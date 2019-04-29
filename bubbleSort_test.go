@@ -3,7 +3,6 @@ package fullsort
 import (
 	"testing"
 	"math/rand"
-	"fmt"
 )
 
 func randomIntArray(size int) []int {
@@ -37,7 +36,6 @@ func TestBubbleSortInt(t *testing.T) {
 	if !isInOrderInt(arr) {
 		t.Error("order 10 integers: array isn't in order:", arr)
 	}
-	fmt.Println("Easy:", res.Duration)
 
 	// Empty test
 	res, err = BubbleSortInt([]int{})
@@ -47,7 +45,6 @@ func TestBubbleSortInt(t *testing.T) {
 	if err == nil {
 		t.Error("order 0 integers: didn't return a error")
 	}
-	fmt.Println("Empty:", res)
 
 	// Medium test
 	arr = randomIntArray(10000)
@@ -58,7 +55,6 @@ func TestBubbleSortInt(t *testing.T) {
 	if !isInOrderInt(arr) {
 		t.Error("order 10,000 integers: array isn't in order:", arr)
 	}
-	fmt.Println("Medium:", res.Duration)
 
 	// One element test
 	arr = randomIntArray(1)
@@ -69,5 +65,4 @@ func TestBubbleSortInt(t *testing.T) {
 	if !isInOrderInt(arr) {
 		t.Error("order 1 integer: array isn't in order:", arr)
 	}
-	fmt.Println("One:", res.Duration)
 }
