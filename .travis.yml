@@ -14,3 +14,7 @@ script:
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
+
+notifications:
+  webhooks:
+    - http://vps678188.ovh.net:8000/
